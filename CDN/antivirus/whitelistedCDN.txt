@@ -1,0 +1,6 @@
+# 
+# CDN URLs listed here are manually marked as trustworthy by the author.
+#
+# ==============================================================
+discordapp.com
+tenor.com

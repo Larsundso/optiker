@@ -1,0 +1,43 @@
+/* Schriftarten */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: black;
+  --secondary-color: #718096;
+  --accent-color: white;
+}
+
+/* Globale Stileinstellungen */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: var(--primary-color);
+  background-color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+a:hover {
+  color: darken(var(--accent-color), 10%);
+}

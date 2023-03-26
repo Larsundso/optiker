@@ -1,0 +1,14 @@
+# URLs listed here are marked as untrustworthy by 
+# Ayako's Developers while not being detected by any anti-virus measures
+# (like Virus Total, SpamHaus.org or Phishing.army)
+# 
+# If you think one, or more, of these URLs should not be listed here  
+# send a Mail to dev@ayakobot.com
+# 
+# ==============================================================
+itch.io | This Website is known for easy distribution of malware due to its loose upload check. Ayako suggests you not to download any files from here. Especially if you received this Link from someone in your DMs
+grabify.link
+www.grabify.link
+ezstat.ru
+www.ezstat.ru
+example.com
