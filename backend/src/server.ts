@@ -6,10 +6,11 @@ import SlowDown from 'express-slow-down';
 
 export const app = Express();
 export const server = http.createServer(app);
+const apiRouter = Express.Router();
 const JSONParser = BodyParser.json();
 const URLEncodedParser = BodyParser.urlencoded({ extended: false });
 
-// const frontendPath = '';
+const frontendPath = '../../frontend/dist/';
 const speedLimiter = SlowDown({
   windowMs: 5 * 1000,
   delayAfter: 10,
@@ -18,7 +19,7 @@ const speedLimiter = SlowDown({
 
 server.listen(80);
 app.enable('trust proxy');
-// app.use(Express.static(frontendPath));
+app.use(Express.static(frontendPath));
 app.use(speedLimiter);
 app.use(URLEncodedParser);
 app.use(cors());
@@ -45,26 +46,27 @@ const handleRequest = async (
     return;
   }
 
-  const subDomain = req.headers.host.split(/\./g)[0].toLowerCase();
-  const param = req.path.split(/\//g)[1].toLowerCase();
-
-  switch (true) {
-    case param === 'api':
-    case subDomain === 'api': {
-      (await import('./routers/api.js')).default(req, res);
-      return;
-    }
-    case param === 'cdn':
-    case subDomain === 'cdn': {
-      (await import('./routers/cdn.js')).default(req, res);
-      return;
-    }
-    default: {
-      res.sendStatus(404);
-    }
-  }
+  (await import('./routers/api.js')).default(req, res);
 };
 
-app.post('*', JSONParser, (...args) => handleRequest(...args));
-app.delete('*', JSONParser, (...args) => handleRequest(...args));
-app.get('*', (...args) => handleRequest(...args));
+apiRouter.use(speedLimiter);
+apiRouter.use(URLEncodedParser);
+apiRouter.use(cors());
+apiRouter.use(
+  BodyParser.json({
+    limit: '25mb',
+    verify: (req, _, buf, encoding) => {
+      if (buf && buf.length) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        req.rawBody = buf.toString(encoding || 'utf8');
+      }
+    },
+  }),
+);
+
+apiRouter.use('/api', Express.json());
+app.get('/api/*', JSONParser, (...args) => handleRequest(...args));
+app.post('/api/*', JSONParser, (...args) => handleRequest(...args));
+app.delete('/api/*', JSONParser, (...args) => handleRequest(...args));
+app.get('/api/*', JSONParser, (...args) => handleRequest(...args));

@@ -25,7 +25,7 @@ const login = async () => {
     password: hashedPassword,
   };
   (
-    fetch("http://api.localhost/login", {
+    fetch(`${window.location.protocol}//${window.location.host}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

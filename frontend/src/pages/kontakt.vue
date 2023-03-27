@@ -14,7 +14,7 @@ const send = () => {
     return;
   }
 
-  fetch("http://api.localhost/kontakt", {
+  fetch(`${window.location.protocol}//${window.location.host}/api/kontakt`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

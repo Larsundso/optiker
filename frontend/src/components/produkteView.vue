@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Produkt from "./produkt.vue";
 
-const produkte = (await fetch("http://api.localhost/produkte").then((r) =>
-  r.json()
-)) as {
+const produkte = (await fetch(
+  `${window.location.protocol}//${window.location.host}/api/produkte`
+).then((r) => r.json())) as {
   name: string;
   img: string;
 }[];

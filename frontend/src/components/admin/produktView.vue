@@ -3,9 +3,9 @@ import Produkt from "./produkt.vue";
 import Cookies from "js-cookie";
 import { ref } from "vue";
 
-const apiProdukte = (await fetch("http://api.localhost/produkte").then((res) =>
-  res.json()
-)) as {
+const apiProdukte = (await fetch(
+  `${window.location.protocol}//${window.location.host}/api/produkte`
+).then((res) => res.json())) as {
   name: string;
   id?: number;
   img: string;
@@ -31,9 +31,9 @@ const deleteProdukt = (delP: { name: string; id?: number; img: string }) => {
     return;
   }
 
-  console.log("Sending delete request to api.localhost/produkt", delP.id);
+  console.log("Sending delete request to localhost/api/produkt", delP.id);
 
-  fetch("http://api.localhost/produkt", {
+  fetch(`${window.location.protocol}//${window.location.host}/api/produkt`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const updateProdukt = (updatedP: {
 };
 
 const save = () => {
-  fetch("http://api.localhost/produkte", {
+  fetch(`${window.location.protocol}//${window.location.host}/api/produkte`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
