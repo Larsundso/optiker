@@ -3,7 +3,7 @@ import ProdukteView from "../components/produkteView.vue";
 </script>
 
 <template>
-  <div class="flex justify-center items-center flex-col">
+  <div class="flex justify-center items-center flex-col flex-wrap">
     <Suspense>
       <template #default>
         <ProdukteView />

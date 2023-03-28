@@ -1,12 +1,11 @@
 /* eslint-disable no-console */
 import pg from 'pg';
-import auth from './auth.json' assert { type: 'json' };
 
 const pool = new pg.Pool({
   user: 'postgres',
-  host: '161.97.136.242',
+  host: 'localhost',
   database: 'Optiker',
-  password: auth.psqlPW,
+  password: 'postgres',
   port: 5432,
 });
 pool.query('SELECT NOW() as now;', (err) => {
